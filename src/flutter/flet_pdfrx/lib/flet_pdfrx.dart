@@ -1,3 +1,3 @@
-library flet_spinkit;
+library flet_pdfrx;
 
 export "src/extension.dart" show Extension;

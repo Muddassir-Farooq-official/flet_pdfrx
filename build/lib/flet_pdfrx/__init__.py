@@ -1,0 +1,1 @@
+from flet_pdfrx.flet_pdfrx import FletPdfrx

@@ -1,5 +1,5 @@
-# flet-spinkit
-FletSpinkit control for Flet
+# flet-pdfrx
+FletPdfrx control for Flet
 
 ## Installation
 
@@ -11,7 +11,7 @@ Link to git repository:
 
 ```
 dependencies = [
-  "flet-spinkit @ git+https://github.com/MyGithubAccount/flet-spinkit",
+  "flet-pdfrx @ git+https://github.com/MyGithubAccount/flet-pdfrx",
   "flet>=0.80.5",
 ]
 ```
@@ -22,7 +22,7 @@ If the package is published on pypi.org:
 
 ```
 dependencies = [
-  "flet-spinkit",
+  "flet-pdfrx",
   "flet>=0.80.5",
 ]
 ```
@@ -34,4 +34,4 @@ flet build macos -v
 
 ## Documentation
 
-[Link to documentation](https://MyGithubAccount.github.io/flet-spinkit/)
+[Link to documentation](https://MyGithubAccount.github.io/flet-pdfrx/)

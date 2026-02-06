@@ -1,5 +1,5 @@
 [project]
-name = "flet-spinkit-example"
+name = "flet-pdfrx-example"
 version = "1.0.0"
 description = ""
 readme = "README.md"
@@ -8,7 +8,7 @@ authors = [
     { name = "Flet developer", email = "you@example.com" }
 ]
 dependencies = [
-    "flet-spinkit",
+    "flet-pdfrx",
     "flet>=0.80.5",
 ]
 
@@ -26,7 +26,7 @@ org = "com.mycompany"
 
 # project display name that is used as an app title on Android and iOS home screens,
 # shown in window titles and about app dialogs on desktop.
-product = "flet-spinkit-example"
+product = "flet-pdfrx-example"
 
 # company name to display in about app dialogs
 company = "Flet"
@@ -38,7 +38,7 @@ copyright = "Copyright (C) 2026 by MyCompany"
 path = "src"
 
 [tool.flet.dev_packages]
-flet-spinkit = "..\\.." # relative path
+flet-pdfrx = "..\\.." # relative path
 
 [tool.uv.sources]
-flet-spinkit = { path = "..\\..\\", editable = true }
+flet-pdfrx = { path = "..\\..\\", editable = true }

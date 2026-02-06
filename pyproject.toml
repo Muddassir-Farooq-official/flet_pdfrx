@@ -1,7 +1,7 @@
 [project]
-name = "flet-spinkit"
+name = "flet-pdfrx"
 version = "0.1.0"
-description = "FletSpinkit control for Flet"
+description = "FletPdfrx control for Flet"
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [
@@ -20,12 +20,12 @@ dev = [
 
 [project.urls]
 Homepage = "https://mydomain.dev"
-Documentation = "https://github.com/MyGithubAccount/flet-spinkit"
-Repository = "https://github.com/MyGithubAccount/flet-spinkit"
-Issues = "https://github.com/MyGithubAccount/flet-spinkit/issues"
+Documentation = "https://github.com/MyGithubAccount/flet-pdfrx"
+Repository = "https://github.com/MyGithubAccount/flet-pdfrx"
+Issues = "https://github.com/MyGithubAccount/flet-pdfrx/issues"
 
 [tool.setuptools.package-data]
-"flutter.flet_spinkit" = ["**/*"]
+"flutter.flet_pdfrx" = ["**/*"]
 
 [tool.setuptools]
 license-files = []

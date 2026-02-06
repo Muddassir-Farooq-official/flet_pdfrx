@@ -1,18 +1,18 @@
 Metadata-Version: 2.4
-Name: flet-spinkit
+Name: flet-pdfrx
 Version: 0.1.0
-Summary: FletSpinkit control for Flet
+Summary: FletPdfrx control for Flet
 Author-email: Flet contributors <you@example.com>
 Project-URL: Homepage, https://mydomain.dev
-Project-URL: Documentation, https://github.com/MyGithubAccount/flet-spinkit
-Project-URL: Repository, https://github.com/MyGithubAccount/flet-spinkit
-Project-URL: Issues, https://github.com/MyGithubAccount/flet-spinkit/issues
+Project-URL: Documentation, https://github.com/MyGithubAccount/flet-pdfrx
+Project-URL: Repository, https://github.com/MyGithubAccount/flet-pdfrx
+Project-URL: Issues, https://github.com/MyGithubAccount/flet-pdfrx/issues
 Requires-Python: >=3.10
 Description-Content-Type: text/markdown
 Requires-Dist: flet>=0.80.5
 
-# flet-spinkit
-FletSpinkit control for Flet
+# flet-pdfrx
+FletPdfrx control for Flet
 
 ## Installation
 
@@ -24,7 +24,7 @@ Link to git repository:
 
 ```
 dependencies = [
-  "flet-spinkit @ git+https://github.com/MyGithubAccount/flet-spinkit",
+  "flet-pdfrx @ git+https://github.com/MyGithubAccount/flet-pdfrx",
   "flet>=0.80.5",
 ]
 ```
@@ -35,7 +35,7 @@ If the package is published on pypi.org:
 
 ```
 dependencies = [
-  "flet-spinkit",
+  "flet-pdfrx",
   "flet>=0.80.5",
 ]
 ```
@@ -47,4 +47,4 @@ flet build macos -v
 
 ## Documentation
 
-[Link to documentation](https://MyGithubAccount.github.io/flet-spinkit/)
+[Link to documentation](https://MyGithubAccount.github.io/flet-pdfrx/)

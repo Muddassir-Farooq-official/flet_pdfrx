@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+src/flet_pdfrx/__init__.py
+src/flet_pdfrx/flet_pdfrx.py
+src/flet_pdfrx.egg-info/PKG-INFO
+src/flet_pdfrx.egg-info/SOURCES.txt
+src/flet_pdfrx.egg-info/dependency_links.txt
+src/flet_pdfrx.egg-info/requires.txt
+src/flet_pdfrx.egg-info/top_level.txt
+src/flutter/flet_pdfrx/pubspec.lock
+src/flutter/flet_pdfrx/pubspec.yaml
+src/flutter/flet_pdfrx/lib/flet_pdfrx.dart
+src/flutter/flet_pdfrx/lib/src/extension.dart
+src/flutter/flet_pdfrx/lib/src/flet_pdfrx.dart
