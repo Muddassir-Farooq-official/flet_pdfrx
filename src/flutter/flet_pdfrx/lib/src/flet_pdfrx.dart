@@ -13,21 +13,37 @@ class FletPdfrxControl extends StatefulWidget {
 class _FletPdfrxControlState extends State<FletPdfrxControl> {
   final _pdfController = PdfViewerController();
   int? _totalPages;
-  int _lastKnownPage = 1;
 
   @override
-  void didUpdateWidget(FletPdfrxControl oldWidget) {
-    super.didUpdateWidget(oldWidget);
+  void initState() {
+    super.initState();
+    widget.control.addInvokeMethodListener(_onInvokeMethod);
+  }
 
-    // Check if page_number property changed
-    final oldPage = oldWidget.control.getInt("pageNumber", 1) ?? 1;
-    final newPage = widget.control.getInt("pageNumber", 1) ?? 1;
+  @override
+  void dispose() {
+    widget.control.removeInvokeMethodListener(_onInvokeMethod);
+    super.dispose();
+  }
 
-    debugPrint(
-        "FletPdfrx didUpdateWidget: oldPage=$oldPage, newPage=$newPage, lastKnown=$_lastKnownPage");
+  /// Receives method calls from Python via _invoke_method().
+  Future<dynamic> _onInvokeMethod(String name, dynamic args) async {
+    Map<String, dynamic> arguments = {};
+    if (args != null && args is Map) {
+      arguments = Map<String, dynamic>.from(args);
+    }
 
-    if (newPage != oldPage && _totalPages != null) {
-      _navigateToPage(newPage);
+    switch (name) {
+      case "go_to_page":
+        final page = arguments["page"] as int? ?? 1;
+        _navigateToPage(page);
+        return null;
+      case "search_text":
+        // TODO: implement search
+        debugPrint("FletPdfrx: search_text not yet implemented");
+        return null;
+      default:
+        throw Exception("Unknown FletPdfrx method: $name");
     }
   }
 
@@ -40,10 +56,8 @@ class _FletPdfrxControlState extends State<FletPdfrxControl> {
     final validPage = page.clamp(1, _totalPages!);
     debugPrint("FletPdfrx: Navigating to page $validPage");
 
-    // Navigate immediately
     if (_pdfController.isReady && mounted) {
       _pdfController.goToPage(pageNumber: validPage);
-      _lastKnownPage = validPage;
     }
   }
 
@@ -59,18 +73,20 @@ class _FletPdfrxControlState extends State<FletPdfrxControl> {
     final params = PdfViewerParams(
       backgroundColor: bgcolor!,
       onViewerReady: (document, controller) {
-        debugPrint("FletPdfrx: PDF loaded with ${document.pages.length} pages");
+        debugPrint(
+            "FletPdfrx: PDF loaded with ${document.pages.length} pages");
         _totalPages = document.pages.length;
         widget.control.triggerEvent("loaded", _totalPages.toString());
 
-        // Navigate to initial page
+        // Navigate to initial page if not page 1
         final initialPage = widget.control.getInt("pageNumber", 1) ?? 1;
-        _navigateToPage(initialPage);
+        if (initialPage != 1) {
+          _navigateToPage(initialPage);
+        }
       },
       onPageChanged: (page) {
         if (page != null) {
           debugPrint("FletPdfrx: Page changed to $page");
-          _lastKnownPage = page;
           widget.control.triggerEvent("page_changed", page.toString());
         }
       },
