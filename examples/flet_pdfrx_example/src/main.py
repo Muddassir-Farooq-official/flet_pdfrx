@@ -33,6 +33,9 @@ async def main(page: ft.Page):
     def on_page_changed(e):
         nonlocal current_page
         current_page = int(e.data)
+        # Keep pdf.page_number in sync so next_page/prev_page
+        # calculate from the actual displayed page.
+        pdf.page_number = current_page
         page_input.value = str(current_page)
         page_slider.value = current_page
         page_info.value = f"Page {current_page} / {total_pages}"
@@ -42,29 +45,25 @@ async def main(page: ft.Page):
         page.update()
 
     async def next_page(e):
-        debug_text.value = f"Debug: Next clicked, current={current_page}, pdf.page_number={pdf.page_number}"
-        page.update()
+        nonlocal current_page
         if current_page < total_pages:
-            pdf.next_page()
-            debug_text.value = f"Debug: Called next_page(), new page_number={pdf.page_number}"
+            await pdf.next_page()
+            debug_text.value = f"Debug: next_page → {pdf.page_number}"
             page.update()
 
     async def prev_page(e):
-        debug_text.value = f"Debug: Prev clicked, current={current_page}, pdf.page_number={pdf.page_number}"
-        page.update()
+        nonlocal current_page
         if current_page > 1:
-            pdf.prev_page()
-            debug_text.value = f"Debug: Called prev_page(), new page_number={pdf.page_number}"
+            await pdf.prev_page()
+            debug_text.value = f"Debug: prev_page → {pdf.page_number}"
             page.update()
 
     async def jump_to_page(e):
         try:
             p = int(page_input.value)
             if 1 <= p <= total_pages:
-                debug_text.value = f"Debug: Jumping to page {p}"
-                page.update()
-                pdf.go_to_page(p)
-                debug_text.value = f"Debug: Called go_to_page({p}), pdf.page_number={pdf.page_number}"
+                await pdf.go_to_page(p)
+                debug_text.value = f"Debug: go_to_page({p})"
                 page.update()
             else:
                 page_input.error_text = f"Enter 1-{total_pages}"
@@ -74,7 +73,7 @@ async def main(page: ft.Page):
             page.update()
 
     async def slider_changed(e):
-        pdf.go_to_page(int(page_slider.value))
+        await pdf.go_to_page(int(page_slider.value))
 
     async def toggle_dark(e):
         pdf.dark_mode = dark_switch.value
@@ -103,20 +102,20 @@ async def main(page: ft.Page):
         on_focus=input_focus,
     )
 
-    prev_btn = ft.ElevatedButton(
+    prev_btn = ft.Button(
         "◀ Prev",
         on_click=prev_page,
         disabled=True,
         icon=ft.Icons.ARROW_BACK,
     )
 
-    next_btn = ft.ElevatedButton(
+    next_btn = ft.Button(
         "Next ▶",
         on_click=next_page,
         icon=ft.Icons.ARROW_FORWARD,
     )
 
-    jump_btn = ft.ElevatedButton(
+    jump_btn = ft.Button(
         "Go",
         on_click=jump_to_page,
         icon=ft.Icons.SEND,
@@ -187,7 +186,7 @@ async def main(page: ft.Page):
         ft.Container(
             content=pdf,
             expand=True,
-            border=ft.border.all(1, ft.Colors.GREY_300),
+            border=ft.Border.all(1, ft.Colors.GREY_300),
             border_radius=8,
         ),
     )
